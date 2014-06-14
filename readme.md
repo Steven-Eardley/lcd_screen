@@ -7,7 +7,7 @@ See Issues on github for todos etc.
 
 ## Installation:
 
-Use a virtualenv if you like - it allows you to keep project packages (e.g. rpi.gpio) separate from host system Python installation.
+For development on a different machine, it may be useful to create a virtualenv - it allows you to keep project packages (e.g. rpi.gpio) separate from host system Python installation.
 
 Set up a virtualenv for this project:
 
@@ -29,4 +29,10 @@ From the source folder created above, use the virtualenv's pip installer to down
 
 	pip install -e .
 
-Currently the useful code is in screentest.py
+Note, lcd_screen may only be executed on a the raspberry pi, due to the GPIO requirements.
+
+## On the pi:
+
+May as well use the main python environment - use the above pip command without a virtualenv to install the dependencies if they're not already there.
+
+Currently the useful code is in screentest.py. Running scripts with GPIO access requires sudo access.
