@@ -1,16 +1,15 @@
 # lcd_screen
 
-Files relating to the operation of the LCD screen connected over GPIO.
-The goal is to make a sensible set of tools to present text in useful and interesting ways.
+Files relating to the operation of the LCD screen connected over GPIO via the arduino bridge.
+The goal is to make a sensible set of tools to present text on the display in useful and interesting ways.
 
 See Issues on github for todos etc.
 
 # Installation:
 
-Use a virtualenv if you like (allows you to keep project packages (e.g. rpi.gpio) separate from host system Python installation.
+Use a virtualenv if you like - it allows you to keep project packages (e.g. rpi.gpio) separate from host system Python installation.
 
 Set up a virtualenv for this project:
-
 	virtualenv -p python2.7 lcd_screen --no-site-packages
 
 This will create a new virtual environment, including places for local libraries. The virtualenv is activated by sourcing the file 'activate' in bin:
