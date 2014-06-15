@@ -1,0 +1,45 @@
+# nicked from arduPi: the arduino -> pi pin mappings.
+
+int raspberryPinNumber(int arduinoPin){
+	switch(arduinoPin){
+		case 2: return 18; break;
+		case 3: return 23; break;
+		case 4: return 24; break;
+		case 5: return 25; break;
+		case 6: return  4; break;
+		case 7: return 17; break;
+		case 8: if(REV == 1){return 21;}else{return 27;} break;
+		case 9: return 22; break;
+		case 10: return 8; break;
+		case 11: return 10; break;
+		case 12: return 9; break;
+		case 13: return 11; break;
+	}
+}
+
+# From the following site, Raspberry Pi pin information.
+http://raspberrypi.znix.com/hipidocs/topic_gpiopins_rev1.htm
+
+Wiring - This is the wiringPi pin number used with Gordon Henderson 's wiringPi library (http://projects.drogon.net/raspberry-pi/wiringpi/). See also : HiPi::Wiring.
+GPIO - This is the internal BCM2835 SOC GPIO pin number. It is the one that is used in the BCM2835 documentation and is the expected input for many of the HiPi modules. See also : HiPi::BCM2835. The module HiPi::Constant provides useful constants for the GPIO pin numbers named for the Raspberry Pi physical header pin numbers.
+Name - This is the common name. Where a kernel device driver uses pins by default, those pins are named for their default function.
+Raspberry Pi - notes the physical pin number on the GPIO header.
+
+
+GPIO PAD 1
+
+Wiring    GPIO     Name   Raspberry Pi   Name    GPIO   Wiring
+-------- ------ ---------- ---- ---- ---------- ------ --------
+   -       -       3V3       1    2      5V0       -      -
+   8       0     I2C0_SDA    3    4      DNC       -      -
+   9       1     I2C0_SCL    5    6      GND       -      -
+   7       4      GPIO_4     7    8    UART0_TXD   14     15
+   -       -       DNC       9    10   UART0_RXD   15     16
+   0       17     GPIO_17    11   12    GPIO_18    18     1
+   2       21     GPIO_21    13   14     DNC       -      -
+   3       22     GPIO_22    15   16    GPIO_23    23     4
+   -       -       DNC       17   18    GPIO_24    24     5
+   12      10    SPI0_MOSI   19   20     GND       -      -
+   13      9     SPI0_MISO   21   22    GPIO_25    25     6
+   14      11    SPI0_SCLK   23   24   SPI0_CE0_N  8      10
+   -       -       DNC       25   26   SPI0_CE1_N  7      11
