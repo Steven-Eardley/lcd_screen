@@ -43,11 +43,17 @@ Running scripts with GPIO access requires sudo access.
 
 ## Class references
 
-# screenController.py
+### screenController.py
 
 This controls the screen. Current callable methods are:
+
 	lcd_init()
+This clears the LCD screen.
+
 	println1()
+This prints up to 16 characters to the top line of the LCD.
+
 	println2()
+This prints up to 16 characters to the bottom line of the LCD.
 
 More documentation to follow.
