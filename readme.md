@@ -36,3 +36,14 @@ Note, lcd_screen may only be executed on a the raspberry pi, due to the GPIO req
 May as well use the main python environment - use the above pip command without a virtualenv to install the dependencies if they're not already there.
 
 Currently the useful code is in screentest.py. Running scripts with GPIO access requires sudo access.
+
+## Class references
+
+# screenController.py
+
+This controls the screen. Current callable methods are:
+	lcd_init()
+	println1()
+	println2()
+
+More documentation to follow.
