@@ -19,7 +19,7 @@ def main():
             screen.println2(raw_input("\nWhat would you like to write? "))
         elif choice == "3":
             screen.lcd_init()
-        else:
-            choice = raw_input("\nWould you like to write to line (1) or (2), or clear the LCD (3)? ")
+            
+        choice = raw_input("\nWould you like to write to line (1) or (2), or clear the LCD (3)? ")
 
 if __name__ == '__main__': main()
