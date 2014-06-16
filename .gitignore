@@ -45,3 +45,6 @@ docs/_build/
 
 # Pycharm stuff
 .idea/
+
+# Vim swap files
+*.swp
