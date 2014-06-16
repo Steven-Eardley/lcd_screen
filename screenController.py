@@ -44,32 +44,31 @@ import time
 class screenController:
     def __init__(self):
         # Define GPIO to LCD mapping
-        LCD_RS = 21
-        LCD_E  = 22
-        LCD_D4 = 24
-        LCD_D5 = 25
-        LCD_D6 = 4
-        LCD_D7 = 17
+        self.LCD_RS = 21
+        self.LCD_E  = 22
+        self.LCD_D4 = 24
+        self.LCD_D5 = 25
+        self.LCD_D6 = 4
+        self.LCD_D7 = 17
          
         # Define some device constants
-        LCD_WIDTH = 16    # Maximum characters per line
-        LCD_CHR = True
-        LCD_CMD = False
-         
-        LCD_LINE_1 = 0x80 # LCD RAM address for the 1st line
-        LCD_LINE_2 = 0xC0 # LCD RAM address for the 2nd line 
+        self.LCD_WIDTH = 16    # Maximum characters per line
+        self.LCD_CHR = True
+        self.LCD_CMD = False
+        self.LCD_LINE_1 = 0x80 # LCD RAM address for the 1st line
+        self.LCD_LINE_2 = 0xC0 # LCD RAM address for the 2nd line 
          
         # Timing constants
-        E_PULSE = 0.00005
-        E_DELAY = 0.00005
+        self._PULSE = 0.00005
+        self.E_DELAY = 0.00005
 
         GPIO.setmode(GPIO.BCM)       # Use BCM GPIO numbers
-        GPIO.setup(LCD_E, GPIO.OUT)  # E
-        GPIO.setup(LCD_RS, GPIO.OUT) # RS
-        GPIO.setup(LCD_D4, GPIO.OUT) # DB4
-        GPIO.setup(LCD_D5, GPIO.OUT) # DB5
-        GPIO.setup(LCD_D6, GPIO.OUT) # DB6
-        GPIO.setup(LCD_D7, GPIO.OUT) # DB7
+        GPIO.setup(self.LCD_E, GPIO.OUT)  # E
+        GPIO.setup(self.LCD_RS, GPIO.OUT) # RS
+        GPIO.setup(self.LCD_D4, GPIO.OUT) # DB4
+        GPIO.setup(self.LCD_D5, GPIO.OUT) # DB5
+        GPIO.setup(self.LCD_D6, GPIO.OUT) # DB6
+        GPIO.setup(self.LCD_D7, GPIO.OUT) # DB7
      
         # Initialise display
         self.lcd_init()
@@ -77,20 +76,20 @@ class screenController:
 
     def lcd_init(self):
         # Initialise display
-        self.lcd_byte(0x33,LCD_CMD)
-        self.lcd_byte(0x32,LCD_CMD)
-        self.lcd_byte(0x28,LCD_CMD)
-        self.lcd_byte(0x0C,LCD_CMD)
-        self.lcd_byte(0x06,LCD_CMD)
-        self.lcd_byte(0x01,LCD_CMD)  
+        self.lcd_byte(0x33,self.LCD_CMD)
+        self.lcd_byte(0x32,self.LCD_CMD)
+        self.lcd_byte(0x28,self.LCD_CMD)
+        self.lcd_byte(0x0C,self.LCD_CMD)
+        self.lcd_byte(0x06,self.LCD_CMD)
+        self.lcd_byte(0x01,self.LCD_CMD)  
 
     def lcd_string(self, message):
         # Send string to display
 
-        message = message.ljust(LCD_WIDTH," ")  
+        message = message.ljust(self.LCD_WIDTH," ")  
 
-        for i in range(LCD_WIDTH):
-            self.lcd_byte(ord(message[i]),LCD_CHR)
+        for i in range(self.LCD_WIDTH):
+            self.lcd_byte(ord(message[i]),self.LCD_CHR)
 
     def lcd_byte(self, bits, mode):
         # Send byte to data pins
@@ -98,55 +97,55 @@ class screenController:
         # mode = True  for character
         #        False for command
 
-        GPIO.output(LCD_RS, mode) # RS
+        GPIO.output(self.LCD_RS, mode) # RS
 
         # High bits
-        GPIO.output(LCD_D4, False)
-        GPIO.output(LCD_D5, False)
-        GPIO.output(LCD_D6, False)
-        GPIO.output(LCD_D7, False)
+        GPIO.output(self.LCD_D4, False)
+        GPIO.output(self.LCD_D5, False)
+        GPIO.output(self.LCD_D6, False)
+        GPIO.output(self.LCD_D7, False)
         if bits&0x10==0x10:
-            GPIO.output(LCD_D4, True)
+            GPIO.output(self.LCD_D4, True)
         if bits&0x20==0x20:
-            GPIO.output(LCD_D5, True)
+            GPIO.output(self.LCD_D5, True)
         if bits&0x40==0x40:
-            GPIO.output(LCD_D6, True)
+            GPIO.output(self.LCD_D6, True)
         if bits&0x80==0x80:
-            GPIO.output(LCD_D7, True)
+            GPIO.output(self.LCD_D7, True)
 
         # Toggle 'Enable' pin
-        time.sleep(E_DELAY)
-        GPIO.output(LCD_E, True)
-        time.sleep(E_PULSE)
-        GPIO.output(LCD_E, False)
-        time.sleep(E_DELAY)      
+        time.sleep(self.E_DELAY)
+        GPIO.output(self.LCD_E, True)
+        time.sleep(self.E_PULSE)
+        GPIO.output(self.LCD_E, False)
+        time.sleep(self.E_DELAY)      
 
         # Low bits
-        GPIO.output(LCD_D4, False)
-        GPIO.output(LCD_D5, False)
-        GPIO.output(LCD_D6, False)
-        GPIO.output(LCD_D7, False)
+        GPIO.output(self.LCD_D4, False)
+        GPIO.output(self.LCD_D5, False)
+        GPIO.output(self.LCD_D6, False)
+        GPIO.output(self.LCD_D7, False)
         if bits&0x01==0x01:
-            GPIO.output(LCD_D4, True)
+            GPIO.output(self.LCD_D4, True)
         if bits&0x02==0x02:
-            GPIO.output(LCD_D5, True)
+            GPIO.output(self.LCD_D5, True)
         if bits&0x04==0x04:
-            GPIO.output(LCD_D6, True)
+            GPIO.output(self.LCD_D6, True)
         if bits&0x08==0x08:
-            GPIO.output(LCD_D7, True)
+            GPIO.output(self.LCD_D7, True)
 
         # Toggle 'Enable' pin
-        time.sleep(E_DELAY)
-        GPIO.output(LCD_E, True)
-        time.sleep(E_PULSE)
-        GPIO.output(LCD_E, False)
-        time.sleep(E_DELAY)   
+        time.sleep(self.E_DELAY)
+        GPIO.output(self.LCD_E, True)
+        time.sleep(self.E_PULSE)
+        GPIO.output(self.LCD_E, False)
+        time.sleep(self.E_DELAY)   
 
     def println1(self, input):
-        self.lcd_byte(LCD_LINE_1, LCD_CMD)
+        self.lcd_byte(self.LCD_LINE_1, self.LCD_CMD)
         self.lcd_string(input)
         
     def println2(self, input):
-        self.lcd_byte(LCD_LINE_2, LCD_CMD)
+        self.lcd_byte(self.LCD_LINE_2, self.LCD_CMD)
         self.lcd_string(input)
 
