@@ -72,17 +72,17 @@ class screenController:
         GPIO.setup(LCD_D7, GPIO.OUT) # DB7
      
         # Initialise display
-        lcd_init()
+        self.lcd_init()
      
 
     def lcd_init(self):
         # Initialise display
-        lcd_byte(0x33,LCD_CMD)
-        lcd_byte(0x32,LCD_CMD)
-        lcd_byte(0x28,LCD_CMD)
-        lcd_byte(0x0C,LCD_CMD)
-        lcd_byte(0x06,LCD_CMD)
-        lcd_byte(0x01,LCD_CMD)  
+        self.lcd_byte(0x33,LCD_CMD)
+        self.lcd_byte(0x32,LCD_CMD)
+        self.lcd_byte(0x28,LCD_CMD)
+        self.lcd_byte(0x0C,LCD_CMD)
+        self.lcd_byte(0x06,LCD_CMD)
+        self.lcd_byte(0x01,LCD_CMD)  
 
     def lcd_string(self, message):
         # Send string to display
@@ -90,7 +90,7 @@ class screenController:
         message = message.ljust(LCD_WIDTH," ")  
 
         for i in range(LCD_WIDTH):
-            lcd_byte(ord(message[i]),LCD_CHR)
+            self.lcd_byte(ord(message[i]),LCD_CHR)
 
     def lcd_byte(self, bits, mode):
         # Send byte to data pins
@@ -143,10 +143,10 @@ class screenController:
         time.sleep(E_DELAY)   
 
     def println1(self, input):
-        lcd_byte(LCD_LINE_1, LCD_CMD)
-        lcd_string(input)
+        self.lcd_byte(LCD_LINE_1, LCD_CMD)
+        self.lcd_string(input)
         
     def println2(self, input):
-        lcd_byte(LCD_LINE_2, LCD_CMD)
-        lcd_string(input)
+        self.lcd_byte(LCD_LINE_2, LCD_CMD)
+        self.lcd_string(input)
 
