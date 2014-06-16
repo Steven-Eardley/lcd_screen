@@ -22,4 +22,6 @@ def main():
             
         choice = raw_input("\nWould you like to write to line (1) or (2), or clear the LCD (3)? ")
 
+    screen.lcd_init()
+
 if __name__ == '__main__': main()
