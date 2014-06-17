@@ -11,10 +11,18 @@ class scrollBuffer:
         if init_text:
             self.write(init_text)
 
-    def write(self, line_text):
+    def write(self, line_text, clean_breaks=False):
     # writes to the end of the buffer, in 16 char chunks
     # we use strip() to remove trailing spaces across lines
-        chunks = [ line_text[i:i+16].strip() for i in range(0, len(line_text), 16) ]
+        if clean_breaks:
+            self.write_clean(line_text)
+        else:
+            chunks = [ line_text[i:i+16].strip() for i in range(0, len(line_text), 16) ]
+            self.buffer += chunks
+            
+    def write_clean(self, line_text):
+    # breaks lines cleanly on word boundaries
+        chunks = []
         self.buffer += chunks
 
     def read_line(self, line_num):
