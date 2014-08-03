@@ -24,21 +24,18 @@ class scrollBuffer:
 	
         # first word is first chunk(s)
 	w0 = words[0]
-	chunks = [ w0[i:i+16] for i in range(0, len(w0), 16) ]
+	self.buffer += [ w0[i:i+16] for i in range(0, len(w0), 16) ]
     
-        # if the word fits in the last chunk, add there, else, form new chunk
+        # if the word fits in the last buffer segment, add there, else, form new chunk
 	for w in words[1:]:
-	    if len(chunks[-1]) + len(w) < 15:
-	        chunks[-1] += " " + w
+	    if len(self.buffer[-1]) + len(w) < 15:
+	        self.buffer[-1] += " " + w
             else:
-                chunks += [ w[i:i+16] for i in range(0, len(w), 16) ]
+                self.buffer += [ w[i:i+16] for i in range(0, len(w), 16) ]
 	
-	self.buffer += chunks
-
     def write_simple(self, line_text):
     # writes to buffer, 16 chars at a time
-	chunks = [ line_text[i:i+16].strip() for i in range(0, len(line_text), 16) ]
-	self.buffer += chunks
+	self.buffer += [ line_text[i:i+16].strip() for i in range(0, len(line_text), 16) ]
 
     def read_line(self, line_num):
     # reads a specific line from the buffer
