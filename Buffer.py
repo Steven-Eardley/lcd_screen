@@ -65,9 +65,6 @@ class ScrollBuffer(Buffer):
             self.write_clean(line_text)
         else:
             self.write_simple(line_text)
-
-        # Every time we write, update the scrolling windows
-        self.window_list = self.window(self.buffer)
             
     def write_clean(self, line_text):
     # breaks lines cleanly on word boundaries
@@ -90,17 +87,21 @@ class ScrollBuffer(Buffer):
 
     def scroll_up(self):
     # scroll towards the beginning of the buffer
-        if self.window_index < len(self.window_list) - 1:
-            self.window_index -= 1
+        if self.window_index > 0:    
+	    self.window_index -= 1
 
     def scroll_down(self):
     # scroll towards the end of the buffer
-        if self.window_index > 0:
+        if self.window_index < len(list(self.window_list)) - 1:
             self.window_index += 1
 
     def read(self):
     # read the current window on the buffer
-        current_lines = []
+        
+        # Every time we read, update the scrolling windows (they may have changed).
+        self.window_list = self.window(self.buffer)
+
+	current_lines = []
         for i in list(self.window_list)[self.window_index]:
             current_lines.append(i)
         return current_lines
@@ -111,7 +112,7 @@ class ScrollBuffer(Buffer):
         for i in xrange(1, size):
             for each in iters[i:]:
                 next(each, None)
-        return izip(*iters)
+        return list(izip(*iters))
 
 class MarqueeBuffer(Buffer):
     """

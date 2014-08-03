@@ -5,13 +5,12 @@
 #
 # __init__ section based on HD44780 Test Script by Matt Hawkins.
 
-#import
 import RPi.GPIO as GPIO
 import time
 
 class screenController:
     def __init__(self):
-        # Define GPIO to LCD mapping
+        # Define GPIO to LCD mapping (configured for arduino bridge ports)
         self.LCD_RS = 21
         self.LCD_E  = 22
         self.LCD_D4 = 24
@@ -19,7 +18,7 @@ class screenController:
         self.LCD_D6 = 4
         self.LCD_D7 = 17
          
-        # Define some device constants
+        # Define some device constants (16x2 display)
         self.LCD_WIDTH  = 16   # Maximum characters per line
         self.LCD_CHR    = True
         self.LCD_CMD    = False
@@ -59,13 +58,13 @@ class screenController:
         GPIO.output(self.LCD_D5, False)
         GPIO.output(self.LCD_D6, False)
         GPIO.output(self.LCD_D7, False)
-        if bits&0x10==0x10:
+        if bits & 0x10 == 0x10:
             GPIO.output(self.LCD_D4, True)
-        if bits&0x20==0x20:
+        if bits & 0x20 == 0x20:
             GPIO.output(self.LCD_D5, True)
-        if bits&0x40==0x40:
+        if bits & 0x40 == 0x40:
             GPIO.output(self.LCD_D6, True)
-        if bits&0x80==0x80:
+        if bits & 0x80 == 0x80:
             GPIO.output(self.LCD_D7, True)
 
         # Toggle 'Enable' pin
@@ -80,13 +79,13 @@ class screenController:
         GPIO.output(self.LCD_D5, False)
         GPIO.output(self.LCD_D6, False)
         GPIO.output(self.LCD_D7, False)
-        if bits&0x01==0x01:
+        if bits & 0x01 == 0x01:
             GPIO.output(self.LCD_D4, True)
-        if bits&0x02==0x02:
+        if bits & 0x02 == 0x02:
             GPIO.output(self.LCD_D5, True)
-        if bits&0x04==0x04:
+        if bits & 0x04 == 0x04:
             GPIO.output(self.LCD_D6, True)
-        if bits&0x08==0x08:
+        if bits & 0x08 == 0x08:
             GPIO.output(self.LCD_D7, True)
 
         # Toggle 'Enable' pin
@@ -98,20 +97,20 @@ class screenController:
 
     def lcd_init(self):
         # Initialise display
-        self.lcd_byte(0x33,self.LCD_CMD)
-        self.lcd_byte(0x32,self.LCD_CMD)
-        self.lcd_byte(0x28,self.LCD_CMD)
-        self.lcd_byte(0x0C,self.LCD_CMD)
-        self.lcd_byte(0x06,self.LCD_CMD)
-        self.lcd_byte(0x01,self.LCD_CMD)  
+        self.lcd_byte(0x33, self.LCD_CMD)
+        self.lcd_byte(0x32, self.LCD_CMD)
+        self.lcd_byte(0x28, self.LCD_CMD)
+        self.lcd_byte(0x0C, self.LCD_CMD)
+        self.lcd_byte(0x06, self.LCD_CMD)
+        self.lcd_byte(0x01, self.LCD_CMD)
 
     def lcd_string(self, message):
         # Send string to display
 
-        message = message.ljust(self.LCD_WIDTH," ")  
+        message = message.ljust(self.LCD_WIDTH, " ")
 
         for i in range(self.LCD_WIDTH):
-            self.lcd_byte(ord(message[i]),self.LCD_CHR)
+            self.lcd_byte(ord(message[i]), self.LCD_CHR)
 
     def println1(self, input):
     # Prints input to the top line of the LCD
