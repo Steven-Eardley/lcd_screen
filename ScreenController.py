@@ -8,7 +8,7 @@
 import RPi.GPIO as GPIO
 import time
 
-class screenController:
+class ScreenController:
     def __init__(self):
         # Define GPIO to LCD mapping (configured for arduino bridge ports)
         self.LCD_RS = 21
@@ -122,3 +122,8 @@ class screenController:
         self.lcd_byte(self.LCD_LINE_2, self.LCD_CMD)
         self.lcd_string(input)
 
+    def print_from_buffer(self, buffer):
+    # Print to the screen from a scroll buffer
+        [line1, line2] = buffer.read()
+        self.println1(line1)
+        self.println2(line2)
