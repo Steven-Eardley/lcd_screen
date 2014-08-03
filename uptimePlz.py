@@ -1,8 +1,8 @@
-from screenController import screenController
+from ScreenController import ScreenController
 import sys
 
 def main():
-    screen = screenController()
+    screen = ScreenController()
 
     for line in sys.stdin:
         uptime = line.split()
@@ -10,4 +10,5 @@ def main():
     screen.println1(uptime[0][:-3] + " " + uptime[1] + " " + uptime[2][:-1])
     print(uptime[0][:-3] + " " + uptime[1] + " " + uptime[2][:-1])
 
-if __name__ == '__main__': main()
+if __name__ == '__main__':
+    main()

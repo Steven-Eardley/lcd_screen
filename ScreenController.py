@@ -127,3 +127,7 @@ class ScreenController:
         [line1, line2] = buffer.read()
         self.println1(line1)
         self.println2(line2)
+
+    def clear(self):
+    # Clear the LCD
+        self.lcd_init()
