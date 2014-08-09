@@ -21,7 +21,7 @@ Deactivate thusly:
 
 	deactivate
 
-Create a folder for the code, e.g. src, then clone (shown below) or clone straight into the virtualenv main folder.
+Create a folder for the code, e.g. src, then clone (shown below).
 
 	git clone git@github.com:Steven-Eardley/lcd_screen.git src
 
@@ -29,9 +29,11 @@ From the source folder created above, use the virtualenv's pip installer to down
 
 	pip install -e .
 
-Note, lcd_screen may only be executed on a the raspberry pi, due to the GPIO requirements.
+**Note, lcd_screen may only be executed on a the raspberry pi, due to the GPIO requirements.** These instructions are useful for developing in an IDE, however.
 
 ## On the pi:
+
+### (TODO: Instructions for setting up GPIO and SPI)
 
 May as well use the main python environment - use the above pip command without a virtualenv to install the dependencies if they're not already there.
 
@@ -43,7 +45,7 @@ Running scripts with GPIO access requires sudo access.
 
 ## Class references
 
-### screenController.py
+### ScreenController.py
 
 This controls the screen. Current callable methods are:
 
@@ -56,4 +58,15 @@ This prints up to 16 characters to the top line of the LCD.
 	println2()
 This prints up to 16 characters to the bottom line of the LCD.
 
-More documentation to follow.
+### Buffer.py
+
+This contains different kinds of buffers; currently the scrollBuffer and the marqueeBuffer. 
+
+
+## Find connected i2c devices
+
+The following command shows at which addresses the i2c devices are on your system. 
+
+    sudo i2cdetect -y 0
+
+It can be installed by running `sudo apt-get install i2c-tools`.
