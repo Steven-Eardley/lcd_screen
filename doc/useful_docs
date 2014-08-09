@@ -7,8 +7,11 @@ http://www.hobbyist.co.nz/?q=16x2-arduino-lcd-shield
 # a site selling a similar bridge:
 http://www.cooking-hacks.com/documentation/tutorials/raspberry-pi-to-arduino-shields-connection-bridge
 
-# an Adafruit ADC (the bridge has ine if these or similar)
+# an Adafruit ADC (the bridge has one if these or similar)
 https://www.modmypi.com/adafruit-4-channel-i2c-12-bit-adc
 
 # the adafruit code repo:
 https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code
+
+# guide to physical computing:
+http://quick2wire.com/articles/physical-python-part-1/
