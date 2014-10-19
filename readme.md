@@ -60,7 +60,7 @@ This prints up to 16 characters to the bottom line of the LCD.
 
 ### Buffer.py
 
-This contains different kinds of buffers; currently the scrollBuffer and the marqueeBuffer. 
+This contains different kinds of buffers; currently the scrollBuffer and the marqueeBuffer (work in progress). 
 
 
 ## Find connected i2c devices
