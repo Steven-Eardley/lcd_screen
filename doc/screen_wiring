@@ -1,4 +1,5 @@
-The wiring for the LCD is as follows:
+The wiring for the LCD:
+
 1 : GND
 2 : 5V
 3 : Contrast (0-5V)*
