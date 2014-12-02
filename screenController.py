@@ -123,3 +123,11 @@ class screenController:
         self.lcd_byte(self.LCD_LINE_2, self.LCD_CMD)
         self.lcd_string(input)
 
+    def marqln1(self, input):
+
+        i = 0
+        while i <= len(input):
+            self.lcd_byte(self.LCD_LINE_1, self.LCD_CMD)
+            self.lcd_string(input[i:])
+            i = i + 1
+            time.sleep(0.5)
